@@ -29,6 +29,16 @@ typedef struct {
 + (instancetype) filterByIntersectingFilters:(NSArray *)filters;
 + (instancetype) filterFromUnionOfFilters:(NSArray *)filters;
 
++ (instancetype) filterWithProbability:(float)probability
+                      forNumberOfItems:(size_t)numberOfItems
+                              encoding:(NSStringEncoding)encoding
+                       andHashFunction:(bloom_filter_hash_func)func;
+
++ (instancetype) filterWithTableSize:(size_t)tableSize
+                    numberOfFunction:(size_t)numFunction
+                            encoding:(NSStringEncoding)encoding
+                     andHashFunction:(bloom_filter_hash_func)func;
+
 - (instancetype) initWithOptions:(BloomFilterOptions)options;
 
 - (void) addObject:(id)object;
