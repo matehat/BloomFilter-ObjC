@@ -118,6 +118,23 @@ bloom_filter_value filter_value_from_objc_object(id object, NSStringEncoding enc
     return self;
 }
 
+- (NSData *)dumpFilter {
+    size_t len = (size_t)ceil((double)(_options.table_size + 7) / 8.0f);
+    unsigned char * array = malloc(len);
+    bloom_filter_read(_bloomFilter, array);
+    NSData *filterData = [NSData dataWithBytesNoCopy:array
+                                              length:len
+                                        freeWhenDone:YES];
+    return filterData;
+}
+- (void)loadFilter:(NSData *)content {
+    size_t len = (size_t)ceil((double)(_options.table_size + 7) / 8.0f);
+    unsigned char * array = malloc(len);
+    memcpy(array, content.bytes, MIN(len, content.length));
+    bloom_filter_load(_bloomFilter, array);
+    free(array);
+}
+
 - (void) addObject:(id)object {
     bloom_filter_insert(_bloomFilter, filter_value_from_objc_object(object, _options.encoding));
 }

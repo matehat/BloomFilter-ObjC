@@ -44,6 +44,9 @@ typedef struct {
 - (void) addObject:(id)object;
 - (BOOL) containsObject:(id)object;
 
+- (void) loadFilter:(NSData *)content;
+- (NSData *) dumpFilter;
+
 - (instancetype) filterFromUnionWithFilter:(BloomFilter *)filter2;
 - (instancetype) filterByIntersectingWithFilter:(BloomFilter *)filter2;
 
