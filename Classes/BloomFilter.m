@@ -63,13 +63,13 @@ bloom_filter_value filter_value_from_objc_object(id object, NSStringEncoding enc
         return nil;
 }
 
-+ (instancetype)filterWithProbability:(float)probability
-                     forNumberOfItems:(size_t)numberOfItems
++ (instancetype)filterWithProbability:(double)p
+                     forNumberOfItems:(size_t)n
                              encoding:(NSStringEncoding)encoding
                       andHashFunction:(bloom_filter_hash_func)func {
     
-    size_t table_size = ceil((numberOfItems * log(probability)) / log(1.0 / (pow(2.0, log(2.0)))));
-    size_t num_funcs = round(log(2.0) * table_size / numberOfItems);
+    size_t table_size = ceil((n * log(p)) / log(1.0 / (pow(2.0, log(2.0)))));
+    size_t num_funcs = round(log(2.0) * table_size / n);
     
     return [self filterWithTableSize:table_size
                     numberOfFunction:num_funcs

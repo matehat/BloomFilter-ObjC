@@ -29,7 +29,7 @@ typedef struct {
 + (instancetype) filterByIntersectingFilters:(NSArray *)filters;
 + (instancetype) filterFromUnionOfFilters:(NSArray *)filters;
 
-+ (instancetype) filterWithProbability:(float)probability
++ (instancetype) filterWithProbability:(double)probability
                       forNumberOfItems:(size_t)numberOfItems
                               encoding:(NSStringEncoding)encoding
                        andHashFunction:(bloom_filter_hash_func)func;
